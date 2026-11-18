@@ -1,52 +1,26 @@
-export const REQUIREMENT_STATUSES = [
-  'backlog',
-  'todo',
-  'in_progress',
-  'review',
-  'done',
-] as const;
+import {
+  PRIORITIES,
+  REQUIREMENT_STATUSES,
+  REQUIREMENT_TYPES,
+  type Priority,
+  type RequirementInputBody,
+  type RequirementRecord,
+  type RequirementStatus,
+  type RequirementType,
+} from '@shared/api.interface';
 
-export type RequirementStatus = (typeof REQUIREMENT_STATUSES)[number];
+export {
+  PRIORITIES,
+  REQUIREMENT_STATUSES,
+  REQUIREMENT_TYPES,
+  type Priority,
+  type RequirementStatus,
+  type RequirementType,
+};
 
-export const PRIORITIES = ['P0', 'P1', 'P2', 'P3'] as const;
+export type Requirement = RequirementRecord;
 
-export type Priority = (typeof PRIORITIES)[number];
-
-export const REQUIREMENT_TYPES = [
-  'feature',
-  'improvement',
-  'bug',
-  'tech',
-] as const;
-
-export type RequirementType = (typeof REQUIREMENT_TYPES)[number];
-
-export interface Requirement {
-  id: string;
-  title: string;
-  description: string;
-  project: string;
-  type: RequirementType;
-  priority: Priority;
-  status: RequirementStatus;
-  owner: string;
-  tags: string[];
-  dueDate: string | null;
-  createdAt: number;
-  updatedAt: number;
-}
-
-export interface RequirementInput {
-  title: string;
-  description: string;
-  project: string;
-  type: RequirementType;
-  priority: Priority;
-  status: RequirementStatus;
-  owner: string;
-  tags: string[];
-  dueDate: string | null;
-}
+export type RequirementInput = RequirementInputBody;
 
 export interface RequirementFilters {
   keyword: string;

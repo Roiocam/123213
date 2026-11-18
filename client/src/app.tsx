@@ -6,11 +6,9 @@ import NotFound from './pages/NotFound/NotFound';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import BoardPage from './pages/board/BoardPage';
 import RequirementListPage from './pages/requirements/RequirementListPage';
-import { RequirementProvider } from './features/requirements/requirement-store';
 
 const RoutesComponent = () => {
   return (
-    <RequirementProvider>
     <Routes>
       <Route element={<Layout />}>
         <Route index element={<DashboardPage />} />
@@ -19,7 +17,6 @@ const RoutesComponent = () => {
       </Route>
       <Route path="*" element={<NotFound />} />
     </Routes>
-    </RequirementProvider>
   );
 };
 
