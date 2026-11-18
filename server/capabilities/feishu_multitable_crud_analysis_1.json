@@ -1,0 +1,167 @@
+{
+  "id": "feishu_multitable_crud_analysis_1",
+  "pluginKey": "@official-plugins/feishu-bitable",
+  "pluginVersion": "1.0.33",
+  "name": "飞书多维表格",
+  "description": "管理飞书多维表格，支持数据的创建、查询、更新、删除、聚合分析",
+  "icon": "https://lf3-static.bytednsdoc.com/obj/eden-cn/fzgeh7nuhfboznulog/bitable.svg",
+  "paramsSchema": {},
+  "formValue": {
+    "fields": [
+      {
+        "type": 1,
+        "bizType": "Text",
+        "readable": true,
+        "writeable": true,
+        "id": "fldDF0AM6q",
+        "name": "项目名称"
+      },
+      {
+        "readable": true,
+        "writeable": true,
+        "name": "客户名称",
+        "type": 3,
+        "bizType": "SingleSelect",
+        "enumValues": [
+          "锦银集团",
+          "意昂集团",
+          "中星通讯",
+          "安盛科技",
+          "大都人寿",
+          "茂胜科技",
+          "EXOR集团",
+          "国信易有限公司"
+        ],
+        "id": "fldD8BFYPW"
+      },
+      {
+        "readable": true,
+        "writeable": true,
+        "id": "fldi3tVsrm",
+        "name": "项目状态",
+        "type": 3,
+        "bizType": "SingleSelect",
+        "enumValues": [
+          "未开始",
+          "已完成",
+          "进行中"
+        ]
+      },
+      {
+        "bizType": "User",
+        "readable": true,
+        "writeable": true,
+        "id": "fldtNKQYB3",
+        "name": "项目负责人",
+        "type": 11
+      },
+      {
+        "enumValues": [
+          "华东区",
+          "华南区",
+          "华北区",
+          ""
+        ],
+        "readable": true,
+        "writeable": true,
+        "id": "fldNPf3ZUP",
+        "name": "所属区域",
+        "type": 3,
+        "bizType": "SingleSelect"
+      },
+      {
+        "id": "fldWr4Pb9Z",
+        "name": "项目总金额（元）",
+        "type": 2,
+        "bizType": "Number",
+        "readable": true,
+        "writeable": true
+      },
+      {
+        "writeable": true,
+        "id": "fld54KMHQb",
+        "name": "预计回款时间",
+        "type": 5,
+        "bizType": "DateTime",
+        "readable": true
+      },
+      {
+        "name": "项目已回款金额（元）",
+        "type": 19,
+        "bizType": "Lookup",
+        "readable": false,
+        "writeable": false,
+        "id": "fld5Oc6sqV"
+      },
+      {
+        "id": "fld8cS3dA3",
+        "name": "项目剩余应回款（元）",
+        "type": 20,
+        "bizType": "Formula",
+        "readable": true,
+        "writeable": false
+      },
+      {
+        "readable": true,
+        "writeable": true,
+        "id": "fldyZuzPUJ",
+        "name": "项目总成本（元）",
+        "type": 2,
+        "bizType": "Number"
+      },
+      {
+        "readable": true,
+        "writeable": true,
+        "type": 2,
+        "bizType": "Number",
+        "id": "fld4JF5Sig",
+        "name": "项目已付成本（元）"
+      },
+      {
+        "type": 20,
+        "bizType": "Formula",
+        "readable": true,
+        "writeable": false,
+        "id": "fldglfDi4f",
+        "name": "项目应付成本（元）"
+      },
+      {
+        "bizType": "Formula",
+        "id": "fldJEFtVyB",
+        "name": "项目利润（元）",
+        "type": 20,
+        "readable": true,
+        "writeable": false
+      },
+      {
+        "name": "财务洞察",
+        "type": 1,
+        "bizType": "Text",
+        "id": "fld2xi4Hmi",
+        "readable": true,
+        "writeable": true
+      },
+      {
+        "name": "最后更新时间",
+        "type": 1002,
+        "bizType": "ModifiedTime",
+        "readable": true,
+        "writeable": false,
+        "id": "fldtyzLYwZ"
+      },
+      {
+        "writeable": false,
+        "type": 1003,
+        "bizType": "CreatedUser",
+        "id": "fld3dZScSi",
+        "name": "业务负责人",
+        "readable": true
+      }
+    ],
+    "tableID": "tblZpNZbzAIx2KCK",
+    "appToken": "FOBcbZj5cas0uQs3z0VcrB7AnOg"
+  },
+  "createdAt": 1795020596008,
+  "updatedAt": 1795020610052,
+  "createdBy": 7580763744733498567
+}
