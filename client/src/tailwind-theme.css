@@ -9,80 +9,103 @@
   --elevate-1: rgba(0,0,0, .03);
   --elevate-2: rgba(0,0,0, .08);
 
-  --background: hsl(0 0% 100%);
-  --foreground: hsl(220 14% 14%);
+  --background: hsl(210 24% 97%);
+  --foreground: hsl(215 22% 16%);
   --card: hsl(0 0% 100%);
-  --card-foreground: hsl(220 14% 14%);
+  --card-foreground: hsl(215 22% 16%);
   --popover: hsl(0 0% 100%);
-  --popover-foreground: hsl(220 14% 14%);
-  --primary: hsl(221 83% 53%);
-  --primary-foreground: hsl(220 14% 98%);
-  --secondary: hsl(220 14% 96%);
-  --secondary-foreground: hsl(220 14% 14%);
-  --muted: hsl(220 14% 96%);
-  --muted-foreground: hsl(218 7% 59%);
-  --accent: hsl(220 14% 96%);
-  --accent-foreground: hsl(220 14% 14%);
-  --info: hsl(221 83% 53%);
-  --info-foreground: hsl(230 100% 98%);
-  --destructive: hsl(2 84% 62%);
+  --popover-foreground: hsl(215 22% 16%);
+  --primary: hsl(186 72% 32%);
+  --primary-foreground: hsl(0 0% 100%);
+  --secondary: hsl(210 20% 94%);
+  --secondary-foreground: hsl(215 22% 16%);
+  --muted: hsl(210 20% 94%);
+  --muted-foreground: hsl(215 12% 46%);
+  --accent: hsl(186 42% 94%);
+  --accent-foreground: hsl(186 72% 24%);
+  --info: hsl(214 82% 56%);
+  --info-foreground: hsl(214 100% 98%);
+  --destructive: hsl(0 72% 55%);
   --destructive-foreground: hsl(0 0% 100%);
-  --success: hsl(130 54% 42%);
-  --success-foreground: hsl(115 77% 97%);
-  --warning: hsl(26 90% 49%);
-  --warning-foreground: hsl(33 100% 96%);
-  --border: hsl(220 14% 89%);
-  --input: hsl(220 14% 89%);
-  --ring: hsl(221 83% 53%);
-  --chart-1: hsl(222 82% 56%);
-  --chart-2: hsl(174 77% 46%);
-  --chart-3: hsl(46 100% 52%);
-  --chart-4: hsl(27 92% 49%);
-  --chart-5: hsl(292 54% 76%);
-  --sidebar: hsl(220 14% 96%);
-  --sidebar-foreground: hsl(220 14% 14%);
-  --sidebar-primary: hsl(221 83% 53%);
-  --sidebar-primary-foreground: hsl(220 14% 98%);
-  --sidebar-accent: hsl(222 100% 94%);
-  --sidebar-accent-foreground: hsl(221 83% 53%);
-  --sidebar-border: hsl(220 14% 89%);
-  --sidebar-ring: hsl(221 83% 53%);
+  --success: hsl(145 58% 38%);
+  --success-foreground: hsl(140 60% 97%);
+  --warning: hsl(36 90% 46%);
+  --warning-foreground: hsl(36 100% 97%);
+  --border: hsl(214 18% 88%);
+  --input: hsl(214 18% 88%);
+  --ring: hsl(186 72% 32%);
+  --chart-1: hsl(186 72% 38%);
+  --chart-2: hsl(214 82% 58%);
+  --chart-3: hsl(36 90% 50%);
+  --chart-4: hsl(145 58% 44%);
+  --chart-5: hsl(265 60% 62%);
+  --sidebar: hsl(205 32% 13%);
+  --sidebar-foreground: hsl(210 20% 76%);
+  --sidebar-primary: hsl(186 72% 42%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(186 65% 22%);
+  --sidebar-accent-foreground: hsl(180 60% 92%);
+  --sidebar-border: hsl(205 26% 22%);
+  --sidebar-ring: hsl(186 72% 42%);
+
+  /* Business semantic colors: requirement status */
+  --status-backlog: hsl(220 10% 58%);
+  --status-todo: hsl(214 82% 56%);
+  --status-in_progress: hsl(186 72% 34%);
+  --status-review: hsl(36 90% 45%);
+  --status-done: hsl(145 58% 38%);
+  --status-backlog-soft: hsl(220 14% 94%);
+  --status-todo-soft: hsl(214 80% 95%);
+  --status-in_progress-soft: hsl(186 55% 94%);
+  --status-review-soft: hsl(36 90% 94%);
+  --status-done-soft: hsl(145 50% 94%);
+
+  /* Business semantic colors: priority */
+  --priority-P0: hsl(0 72% 55%);
+  --priority-P1: hsl(22 88% 52%);
+  --priority-P2: hsl(36 90% 45%);
+  --priority-P3: hsl(220 10% 55%);
+  --priority-P0-soft: hsl(0 80% 95%);
+  --priority-P1-soft: hsl(22 90% 95%);
+  --priority-P2-soft: hsl(36 90% 94%);
+  --priority-P3-soft: hsl(220 14% 94%);
+
+  --overdue: hsl(0 72% 55%);
 
   /* Computed borders using hsl relative color syntax */
-  --primary-border: hsl(from hsl(221 83% 53%) h s calc(l + var(--opaque-button-border-intensity)));
-  --secondary-border: hsl(from hsl(220 14% 96%) h s calc(l + var(--opaque-button-border-intensity)));
-  --destructive-border: hsl(from hsl(2 84% 62%) h s calc(l + var(--opaque-button-border-intensity)));
-  --accent-border: hsl(from hsl(220 14% 96%) h s calc(l + var(--opaque-button-border-intensity)));
-  --muted-border: hsl(from hsl(220 14% 96%) h s calc(l + var(--opaque-button-border-intensity)));
+  --primary-border: hsl(from hsl(186 72% 32%) h s calc(l + var(--opaque-button-border-intensity)));
+  --secondary-border: hsl(from hsl(210 20% 94%) h s calc(l + var(--opaque-button-border-intensity)));
+  --destructive-border: hsl(from hsl(0 72% 55%) h s calc(l + var(--opaque-button-border-intensity)));
+  --accent-border: hsl(from hsl(186 42% 94%) h s calc(l + var(--opaque-button-border-intensity)));
+  --muted-border: hsl(from hsl(210 20% 94%) h s calc(l + var(--opaque-button-border-intensity)));
   --font-sans:
-    'LarkHackSafariFont', 'LarkEmojiFont', 'LarkChineseQuote', '-apple-system',
-    'BlinkMacSystemFont', 'Helvetica Neue', 'Tahoma', 'PingFang SC',
-    'Microsoft Yahei', 'Arial', 'Hiragino Sans GB', 'sans-serif',
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    'Manrope', 'Noto Sans SC', 'LarkHackSafariFont', 'LarkEmojiFont',
+    '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', 'PingFang SC',
+    'Microsoft Yahei', 'Arial', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   --font-serif:
-    'Geist', 'Geist Fallback', ui-serif, Georgia, Cambria, 'Times New Roman',
-    Times, serif;
-  --font-mono: Source Code Pro, monospace;
+    'Manrope', 'Noto Sans SC', -apple-system, 'PingFang SC', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Source Code Pro', ui-monospace, monospace;
   --radius: 0.5rem;
   --shadow-x: 0px;
   --shadow-y: 2px;
   --shadow-blur: 12px;
   --shadow-spread: 0px;
-  --shadow-opacity: 0.02;
+  --shadow-opacity: 0.04;
   --shadow-color: #000000;
-  --shadow-2xs: 0px 2px 12px 0px hsl(0 0% 0% / 0.01);
-  --shadow-xs: 0px 2px 12px 0px hsl(0 0% 0% / 0.01);
+  --shadow-2xs: 0px 2px 12px 0px hsl(205 30% 20% / 0.03);
+  --shadow-xs: 0px 2px 12px 0px hsl(205 30% 20% / 0.04);
   --shadow-sm:
-    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 1px 2px -1px hsl(0 0% 0% / 0.02);
+    0px 1px 2px 0px hsl(205 30% 20% / 0.05), 0px 2px 8px -2px hsl(205 30% 20% / 0.05);
   --shadow:
-    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 1px 2px -1px hsl(0 0% 0% / 0.02);
+    0px 2px 8px -1px hsl(205 30% 20% / 0.06), 0px 4px 12px -2px hsl(205 30% 20% / 0.05);
   --shadow-md:
-    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 2px 4px -1px hsl(0 0% 0% / 0.02);
+    0px 4px 10px -2px hsl(205 30% 20% / 0.08), 0px 8px 20px -4px hsl(205 30% 20% / 0.08);
   --shadow-lg:
-    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 4px 6px -1px hsl(0 0% 0% / 0.02);
+    0px 8px 16px -4px hsl(205 30% 20% / 0.12), 0px 16px 32px -8px hsl(205 30% 20% / 0.12);
   --shadow-xl:
-    0px 2px 12px 0px hsl(0 0% 0% / 0.02), 0px 8px 10px -1px hsl(0 0% 0% / 0.02);
-  --shadow-2xl: 0px 2px 12px 0px hsl(0 0% 0% / 0.05);
+    0px 12px 24px -6px hsl(205 30% 20% / 0.16), 0px 24px 48px -12px hsl(205 30% 20% / 0.14);
+  --shadow-2xl: 0px 16px 40px -8px hsl(205 30% 20% / 0.22);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
 }
@@ -127,6 +150,28 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
+  --color-status-backlog: var(--status-backlog);
+  --color-status-todo: var(--status-todo);
+  --color-status-in_progress: var(--status-in_progress);
+  --color-status-review: var(--status-review);
+  --color-status-done: var(--status-done);
+  --color-status-backlog-soft: var(--status-backlog-soft);
+  --color-status-todo-soft: var(--status-todo-soft);
+  --color-status-in_progress-soft: var(--status-in_progress-soft);
+  --color-status-review-soft: var(--status-review-soft);
+  --color-status-done-soft: var(--status-done-soft);
+
+  --color-priority-P0: var(--priority-P0);
+  --color-priority-P1: var(--priority-P1);
+  --color-priority-P2: var(--priority-P2);
+  --color-priority-P3: var(--priority-P3);
+  --color-priority-P0-soft: var(--priority-P0-soft);
+  --color-priority-P1-soft: var(--priority-P1-soft);
+  --color-priority-P2-soft: var(--priority-P2-soft);
+  --color-priority-P3-soft: var(--priority-P3-soft);
+
+  --color-overdue: var(--overdue);
+
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-serif: var(--font-serif);
@@ -159,12 +204,12 @@
  * <element className="toggle-elevate toggle-elevated" />
  *
  * Elevation systems have to handle many states.
- * - not-hovered, vs. hovered vs. active  (three mutually exclusive states)
+ * - not-hovered, vs. hovered vs. active  (three mutually exclusive)
  * - toggled or not
- * - focused or not (this is not handled with these utilities)
  *
- * Even without handling focused or not, this is six possible combinations that
- * need to be distinguished from eachother visually.
+ * This is six possible states that have to be distinguished from eachother
+ * visually. Toggleable backgrounds go behind the content. Hoverable/active
+ * goes on top. This way they can stack/compound.
  */
 @layer utilities {
   /* Hide ugly search cancel button in Chrome until we can style it properly */
@@ -189,7 +234,7 @@
   /**
    * Toggleable backgrounds go behind the content. Hoverable/active goes on top.
    * This way they can stack/compound. Both will overlap the parent's borders!
-   * So borders will be automatically adjusted both on toggle, and hover/active,
+   * Borders will be automatically adjusted both on toggle, and hover/active,
    * and they will be compounded.
    */
   .toggle-elevate::before,
@@ -208,7 +253,7 @@
     background-color: var(--elevate-2);
   }
 
-  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
+  /* If there's a 1px border, adjust the inset so it covers that parent's border */
   .border.toggle-elevate::before {
     inset: -1px;
   }
@@ -233,7 +278,7 @@
     inset: 0px;
     /*border-radius: inherit;   match rounded corners */
     border-radius: inherit;
-    z-index: 999;
+    z-index: 99;
     /* sits in front of content */
   }
 
@@ -247,7 +292,7 @@
     background-color: var(--elevate-2);
   }
 
-  /* If there's a 1px border, adjust the inset so that it covers that parent's border */
+  /* If there's a 1px border, adjust the inset so it covers that parent's border */
   .border.hover-elevate:not(.no-hover-interaction-elevate)::after,
   .border.active-elevate:not(.no-active-interaction-elevate)::after,
   .border.hover-elevate-2:not(.no-hover-interaction-elevate)::after,
