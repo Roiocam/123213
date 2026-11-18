@@ -32,6 +32,7 @@ import {
   TypeBadge,
 } from '@/features/requirements/components/badges';
 import RequirementFormDialog from '@/features/requirements/components/RequirementFormDialog';
+import QueryErrorState from '@/features/requirements/components/QueryErrorState';
 import {
   PRIORITIES,
   PRIORITY_LABELS,
@@ -132,6 +133,8 @@ const RequirementListPage = () => {
   const {
     requirements,
     loading,
+    error,
+    refetch,
     removeRequirement,
   } = useRequirements();
 
@@ -167,9 +170,8 @@ const RequirementListPage = () => {
 
   const confirmDelete = useCallback((): void => {
     if (!pendingDelete) return;
-    removeRequirement(pendingDelete.id);
+    removeRequirement(pendingDelete.id, () => toast.success('需求已删除'));
     setPendingDelete(null);
-    toast.success('需求已删除');
   }, [pendingDelete, removeRequirement]);
 
   const handleKeywordChange = useCallback(
@@ -483,6 +485,8 @@ const RequirementListPage = () => {
 
         {loading ? (
           <TableSkeleton />
+        ) : error ? (
+          <QueryErrorState message={error} onRetry={refetch} />
         ) : (
           <Table<Requirement>
             columns={columns}

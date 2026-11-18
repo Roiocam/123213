@@ -4,9 +4,10 @@
 
 团队级「项目需求看板」：统揽需求从提出到交付的全流程，提供统计工作台、状态看板、需求列表（含增删改查）。
 
-- **数据边界（当前）**：纯前端闭环 demo，无后端、无数据库、无插件。数据保存在浏览器 `localStorage`，首次进入写入内置示例数据；刷新不丢、可「重置示例数据」。判定依据：用户选择「还没有多维表格，先用示例数据搭建演示」。
-- **未来切换点**：用户提供真实飞书多维表格链接后，创建 `feishu-bitable` 插件实例（searchRecords / batchAddRecords / batchUpdateRecords / deleteRecords / aggregateQuery），仅替换 `client/src/features/requirements/requirement-store.tsx` 的数据实现，页面与组件契约不变。切换前禁止 mock 插件、禁止伪造 appToken。
-- 应用类型：全栈模板，但本阶段只写 `client/**`；不新增 server 模块、不注册路由、不动 `shared/api.interface.ts`。
+- **数据边界（当前）**：全栈。PostgreSQL `requirement` 表为主存储（Drizzle ORM，RLS 已开启），写操作经 `feishu-bitable` 插件实例 `feishu_multitable_crud_analysis_1` 双写到飞书多维表格。前端用 react-query 调 `/api/requirements`，已移除 localStorage。
+- **双写策略**：PG 是事实源，多维表格用于演示连接与备份。新增→batchAddRecords、更新→batchUpdateRecords、删除→deleteRecords。多维表格失败不阻断 PG，结果记录在 `bitable_sync_status`（synced/pending/failed）+ `bitable_sync_error`；工作台「同步到多维表格」按钮补偿无 recordId 的 pending 记录。
+- **字段映射（PG→多维表格）**：目标表实为项目财务台账，字段不对应。`title→项目名称`、`status→项目状态`（backlog/todo=未开始，in_progress/review=进行中，done=已完成）；项目/优先级/类型/标签/负责人/截止/描述合并写入「财务洞察」文本；金额/客户/区域/人员等无来源字段留空。
+- 后端模块 `server/modules/requirement`（controller/service/bitable-sync/mapper/dto/seed），共享契约在 `shared/api.interface.ts`，前端 API 出口 `client/src/api/requirement.ts`，数据 hook 仍为 `features/requirements/requirement-store.tsx`（已改为 react-query，对外方法签名不变）。
 
 ## 目录结构
 
@@ -39,8 +40,11 @@ client/src/
 | owner | string | 负责人姓名（固定团队成员，文本） |
 | tags | string[] | 标签多选 |
 | dueDate | string | 截止日期 `YYYY-MM-DD`，可空 |
-| createdAt | number | 创建时间戳 |
-| updatedAt | number | 更新时间戳 |
+| createdAt | number | 创建时间戳（PG 为 timestamptz，接口层 `.getTime()` 转 number） |
+| updatedAt | number | 更新时间戳（同上） |
+| bitableRecordId | string\|null | 多维表格记录 ID，双写成功后回填 |
+| bitableSyncStatus | synced/pending/failed | 多维表格同步状态 |
+| bitableSyncError | string\|null | 多维表格最近一次失败原因 |
 
 固定取值（状态/优先级/类型/项目/成员/标签）全部集中在 `constants.ts` 用 `as const` 定义并导出 label 与配色，页面只导入、不另写枚举。
 

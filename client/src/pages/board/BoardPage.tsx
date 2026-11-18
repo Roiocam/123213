@@ -10,6 +10,7 @@ import RequirementCard from '@/features/requirements/components/RequirementCard'
 import RequirementFormDialog from '@/features/requirements/components/RequirementFormDialog';
 import { STATUS_DOT_CLASS, STATUS_LABELS } from '@/features/requirements/constants';
 import { useRequirements } from '@/features/requirements/requirement-store';
+import QueryErrorState from '@/features/requirements/components/QueryErrorState';
 import {
   REQUIREMENT_STATUSES,
   type Requirement,
@@ -40,7 +41,8 @@ const CardSkeleton = () => (
 );
 
 const BoardPage = () => {
-  const { requirements, loading, changeStatus } = useRequirements();
+  const { requirements, loading, error, refetch, changeStatus } =
+    useRequirements();
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
   const [editing, setEditing] = useState<Requirement | null>(null);
   const shouldReduceMotion = useReducedMotion();
@@ -65,8 +67,9 @@ const BoardPage = () => {
 
   const moveTo = useCallback(
     (requirement: Requirement, target: RequirementStatus): void => {
-      changeStatus(requirement.id, target);
-      toast.success(`已移动到「${STATUS_LABELS[target]}」`);
+      changeStatus(requirement.id, target, () =>
+        toast.success(`已移动到「${STATUS_LABELS[target]}」`),
+      );
     },
     [changeStatus],
   );
@@ -86,7 +89,10 @@ const BoardPage = () => {
         </Button>
       </header>
 
-      <div className="flex snap-x gap-4 overflow-x-auto pb-3">
+      {error ? (
+        <QueryErrorState message={error} onRetry={refetch} />
+      ) : (
+        <div className="flex snap-x gap-4 overflow-x-auto pb-3">
         {REQUIREMENT_STATUSES.map((status: RequirementStatus) => {
           const items: Requirement[] = grouped[status];
           const index = REQUIREMENT_STATUSES.indexOf(status);
@@ -180,7 +186,8 @@ const BoardPage = () => {
             </section>
           );
         })}
-      </div>
+        </div>
+      )}
 
       <RequirementFormDialog
         open={dialogOpen}

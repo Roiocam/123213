@@ -19,6 +19,8 @@ import type {
 
 const QUERY_KEY = ['requirements'] as const;
 
+type SuccessCallback = () => void;
+
 interface RequirementContextValue {
   requirements: Requirement[];
   loading: boolean;
@@ -26,11 +28,19 @@ interface RequirementContextValue {
   refetch: () => void;
   submitting: boolean;
   bitableSyncing: boolean;
-  addRequirement: (input: RequirementInput) => void;
-  updateRequirement: (id: string, input: RequirementInput) => void;
-  changeStatus: (id: string, status: RequirementStatus) => void;
-  removeRequirement: (id: string) => void;
-  resetDemo: () => void;
+  addRequirement: (input: RequirementInput, onSuccess?: SuccessCallback) => void;
+  updateRequirement: (
+    id: string,
+    input: RequirementInput,
+    onSuccess?: SuccessCallback,
+  ) => void;
+  changeStatus: (
+    id: string,
+    status: RequirementStatus,
+    onSuccess?: SuccessCallback,
+  ) => void;
+  removeRequirement: (id: string, onSuccess?: SuccessCallback) => void;
+  resetDemo: (onSuccess?: SuccessCallback) => void;
   syncBitable: () => void;
 }
 
@@ -103,13 +113,16 @@ export const useRequirements = (): RequirementContextValue => {
     },
     submitting: createMutation.isPending || updateMutation.isPending,
     bitableSyncing: syncMutation.isPending,
-    addRequirement: (input: RequirementInput) => createMutation.mutate(input),
-    updateRequirement: (id: string, input: RequirementInput) =>
-      updateMutation.mutate({ id, input }),
-    changeStatus: (id: string, status: RequirementStatus) =>
-      statusMutation.mutate({ id, status }),
-    removeRequirement: (id: string) => deleteMutation.mutate(id),
-    resetDemo: () => resetMutation.mutate(),
+    addRequirement: (input, onSuccess) =>
+      createMutation.mutate(input, { onSuccess }),
+    updateRequirement: (id, input, onSuccess) =>
+      updateMutation.mutate({ id, input }, { onSuccess }),
+    changeStatus: (id, status, onSuccess) =>
+      statusMutation.mutate({ id, status }, { onSuccess }),
+    removeRequirement: (id, onSuccess) =>
+      deleteMutation.mutate(id, { onSuccess }),
+    resetDemo: (onSuccess) =>
+      resetMutation.mutate(undefined, { onSuccess }),
     syncBitable: () => syncMutation.mutate(),
   };
 };

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import ReactECharts from 'echarts-for-react';
 import type { EChartsOption } from 'echarts';
-import { Activity, AlarmClock, Eye, ListTodo, RotateCcw } from 'lucide-react';
+import { Activity, AlarmClock, Eye, ListTodo, RefreshCw, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -25,6 +25,7 @@ import {
 } from '@/components/ui/alert-dialog';
 
 import StatCard from '@/features/requirements/components/StatCard';
+import QueryErrorState from '@/features/requirements/components/QueryErrorState';
 import {
   CHART_COLORS,
   PRIORITIES,
@@ -139,7 +140,15 @@ const DashboardSkeleton = () => (
 );
 
 const DashboardPage = () => {
-  const { requirements, loading, resetDemo } = useRequirements();
+  const {
+    requirements,
+    loading,
+    error,
+    refetch,
+    resetDemo,
+    syncBitable,
+    bitableSyncing,
+  } = useRequirements();
 
   const stats = useMemo<DashboardStats>(() => buildStats(requirements), [
     requirements,
@@ -254,8 +263,7 @@ const DashboardPage = () => {
   }), [stats.typeCounts]);
 
   const handleReset = useCallback(() => {
-    resetDemo();
-    toast.success('已恢复示例数据');
+    resetDemo(() => toast.success('已恢复示例数据'));
   }, [resetDemo]);
 
   const isEmpty = !loading && requirements.length === 0;
@@ -269,6 +277,16 @@ const DashboardPage = () => {
             需求整体进度、状态与优先级分布统计
           </p>
         </div>
+        <Button
+          variant="outline"
+          size="sm"
+          className="gap-1.5"
+          onClick={() => syncBitable()}
+          disabled={bitableSyncing}
+        >
+          <RefreshCw className={`h-3.5 w-3.5 ${bitableSyncing ? 'animate-spin' : ''}`} />
+          {bitableSyncing ? '同步中…' : '同步到多维表格'}
+        </Button>
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button variant="outline" size="sm" className="gap-1.5">
@@ -295,6 +313,8 @@ const DashboardPage = () => {
 
       {loading ? (
         <DashboardSkeleton />
+      ) : error ? (
+        <QueryErrorState message={error} onRetry={refetch} />
       ) : isEmpty ? (
         <Card className="flex flex-col items-center justify-center gap-3 border-dashed py-16 text-center">
           <span className="flex h-12 w-12 items-center justify-center rounded-md bg-muted text-muted-foreground">

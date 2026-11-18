@@ -105,7 +105,7 @@ const RequirementFormDialog = ({
   onOpenChange,
   initial,
 }: RequirementFormDialogProps) => {
-  const { addRequirement, updateRequirement } = useRequirements();
+  const { addRequirement, updateRequirement, submitting } = useRequirements();
   const isEdit = initial !== null;
 
   const form = useForm<FormValues>({
@@ -132,11 +132,11 @@ const RequirementFormDialog = ({
       dueDate: values.dueDate,
     };
     if (isEdit) {
-      updateRequirement(initial.id, payload);
-      toast.success('需求已更新');
+      updateRequirement(initial.id, payload, () =>
+        toast.success('需求已更新'),
+      );
     } else {
-      addRequirement(payload);
-      toast.success('需求已创建');
+      addRequirement(payload, () => toast.success('需求已创建'));
     }
     onOpenChange(false);
   };
@@ -430,7 +430,7 @@ const RequirementFormDialog = ({
               >
                 取消
               </Button>
-              <Button type="submit" disabled={form.formState.isSubmitting}>
+              <Button type="submit" disabled={submitting}>
                 {isEdit ? '保存修改' : '创建需求'}
               </Button>
             </DialogFooter>
